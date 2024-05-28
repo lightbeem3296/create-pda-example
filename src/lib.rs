@@ -56,7 +56,7 @@ fn process_instruction(
         USER_STAKE_SIZE
     );
 
-    invoke_signed(
+    let _ = invoke_signed(
         &system_instruction::create_account(
             user.key,
             user_derived_account.key,

@@ -2,9 +2,14 @@
 
 use std::assert_eq;
 
+use borsh::BorshDeserialize;
+use create_pda_example::UserStake;
 use solana_program::pubkey::Pubkey;
 use solana_sdk::{
-    signature::Signer, signer::keypair::Keypair, system_program, system_transaction,
+    instruction::{AccountMeta, Instruction},
+    signature::Signer,
+    signer::keypair::Keypair,
+    system_program, system_transaction,
     transaction::Transaction,
 };
 use solana_validator::test_validator::*;
@@ -39,7 +44,7 @@ fn test_validator_transaction() {
             accounts: vec![
                 AccountMeta::new(alice.pubkey(), true),
                 AccountMeta::new(alice_pda, false),
-                AccountMeta::nw(system_program::id(), false),
+                AccountMeta::new(system_program::id(), false),
             ],
             data: instruction_data,
         }],
